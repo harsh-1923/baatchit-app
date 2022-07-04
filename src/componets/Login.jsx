@@ -1,9 +1,38 @@
-import React from 'react'
+import React from "react";
 
-const Login = () => {
+import { GoogleOutlined, FacebookOutlined } from "@ant-design/icons";
+
+import firebase from "firebase/compat/app";
+
+import { auth } from "../firebase";
+
+export default function Login() {
   return (
-    <div>Login</div>
-  )
-}
+    <div id="login-page">
+      <div id="login-card">
+        <h2>Welcome to Unichat!</h2>
 
-export default Login
+        <div
+          className="login-button google"
+          onClick={() =>
+            auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+          }
+        >
+          <GoogleOutlined /> Sign In with Google
+        </div>
+
+        <br />
+        <br />
+
+        <div
+          className="login-button facebook"
+          onClick={() =>
+            auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
+          }
+        >
+          <FacebookOutlined /> Sign In with Facebook
+        </div>
+      </div>
+    </div>
+  );
+}

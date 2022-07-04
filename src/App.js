@@ -10,7 +10,7 @@ import Login from "./componets/Login.jsx";
 function App() {
   return (
     <AuthProvider>
-      <div style={{ fontFamily: "Avenir" }}>
+      <div >
         <Routes>
           <Route path="/chats" element={<Chats />} />
           <Route path="/login" element={<Login />} />

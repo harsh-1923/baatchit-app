@@ -1,31 +1,35 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react";
 
-// import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-import { auth } from "../firebase"
+import { auth } from "../firebase";
 
-const AuthContext = React.createContext()
+const AuthContext = React.createContext();
 
-export function useAuth() { return useContext(AuthContext) }
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export function AuthProvider({ children }) {
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState()
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState();
   // const history = useHistory()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      setUser(user)
-      setLoading(false)
-      // history.push('/chats')
-    })
-  }, [user])
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading(false);
+      // navigate("/chats");
+    });
+  }, [user]);
+  // eslint-disable-next-line
 
-  const value = { user }
+  const value = { user };
 
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
-  )
+  );
 }
